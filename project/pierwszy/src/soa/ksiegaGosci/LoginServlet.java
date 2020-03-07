@@ -47,7 +47,13 @@ public class LoginServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String text = request.getParameter("comment");
-        var currentUser = findUser(request.getCookies()[1].getValue());
+        String login = "";
+        for (Cookie a : request.getCookies()) {
+            if (a.getName().equals("user")) {
+                login = a.getValue();
+            }
+        }
+        var currentUser = findUser(login);
         if(text != null) comments.add(new Comment(text, currentUser.login, currentUser.imie, currentUser.nazwisko));
         request.setAttribute("imie", currentUser.imie);
         request.setAttribute("nazwisko", currentUser.nazwisko);
