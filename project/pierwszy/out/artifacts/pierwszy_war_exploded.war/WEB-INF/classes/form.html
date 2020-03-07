@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Beer Form</title>
+</head>
+<body>
+<form action="WyborPiwa" method="get">
+    <p>Podaj datę urodzenia:</p>
+    <input type="date" dataformatas="yyyy-mm-dd" name="birth"/>
+    <p>Podaj kolor wymarzonego piwa:</p>
+    <select name="color" id="color">
+        <option value="białe">Białe</option>
+        <option value="jasne">Jasne</option>
+        <option value="ciemne">Ciemne</option>
+        <option value="czerwone">Czerwone</option>
+        <option value="inne">Zaskocz mnie</option>
+    </select>
+    <input type="submit" value="Wyslij"/>
+</form>
+</body>
+</html>
