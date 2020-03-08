@@ -36,5 +36,9 @@
     <form action="LoginServlet" method="get">
         <input type="submit" value="Odśwież"/>
     </form>
+    <form action="LoginServlet" method="get">
+        <input type="hidden" name="logout" value="true"/>
+        <input type="submit" value="Wyloguj"/>
+    </form>
 </body>
 </html>
