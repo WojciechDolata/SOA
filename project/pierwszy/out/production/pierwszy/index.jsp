@@ -16,5 +16,8 @@
     Date tmp = new Date();
     out.println("<h2> " + tmp.toString() + " </h2>");
   %>
+  <a href="http://localhost:8080/Zadanie1.html">Zadanie1</a>
+  <a href="http://localhost:8080/form.html">Zadanie2</a>
+  <a href="http://localhost:8080/login.jsp">Zadanie3</a>
   </body>
 </html>

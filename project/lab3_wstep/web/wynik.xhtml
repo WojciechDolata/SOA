@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<!--<f:view>-->
+<!--<h:outputLabel value="Hello, world"/>-->
+<!--</f:view>-->
+<h:head>
+
+</h:head>
+<h:body>
+    Podsumowanie <br/>
+    Imię: #{PersonalDetailsManager.last.name} <br/>
+    Edukacja: #{PersonalDetailsManager.last.education} <br/>
+    Płeć: #{PersonalDetailsManager.last.sex} <br/>
+    Wiek: #{PersonalDetailsManager.last.age} <br/>
+    Wzrost: #{PersonalDetailsManager.last.height} <br/>
+    Ulubione kolory: #{PersonalDetailsManager.last.colors} <br/>
+    Częstotliwość: #{PersonalDetailsManager.last.howOften} <br/>
+    Typy ubioru: #{PersonalDetailsManager.last.types} <br/>
+    <h:panelGroup rendered="#{PersonalDetailsManager.last.sex eq 'male'}">
+        Klatka: #{PersonalDetailsManager.last.chest} <br/>
+        Pas: #{PersonalDetailsManager.last.belt} <br/>
+    </h:panelGroup>
+    <h:panelGroup rendered="#{PersonalDetailsManager.last.sex eq 'female'}">
+        Obwód biustu: #{PersonalDetailsManager.last.breastCircumference} <br/>
+        Miseczka: #{PersonalDetailsManager.last.cupSize} <br/>
+        Talia: #{PersonalDetailsManager.last.waist} <br/>
+        Uda: #{PersonalDetailsManager.last.hips} <br/>
+    </h:panelGroup>
+    <h:commandButton value="wypelnij nową ankietę" action="ankieta"></h:commandButton>
+</h:body>
+</html>

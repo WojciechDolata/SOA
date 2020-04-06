@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    Zakup biletu
+</h:head>
+<h:body>
+    Kup bilet <br/>
+    <h:form>
+        Rząd <h:inputText id="nick" value="#{SeatLocation.row}" required="true"/> (max 10) <br/>
+        Kolumna <h:inputText id="password" value="#{SeatLocation.column}" required="true"/> (max 8) <br/>
+        <h:commandButton value="Kup!" action="#{Purchaser.purchase(SeatLocation)}"></h:commandButton>
+    </h:form>
+
+    <h:form>
+        <h:commandButton value="Wyloguj" action="#{LoginManager.logout}"></h:commandButton>
+    </h:form>
+
+</h:body>
+</html>

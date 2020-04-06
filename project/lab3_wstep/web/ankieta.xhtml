@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+<h:head>
+    Ankieta
+</h:head>
+<h:body>
+    Proszę wypełnić ankietę:
+    <h:form>
+        <h:outputLabel>Podaj dane</h:outputLabel>
+        Imię i nazwisko <h:inputText id="name" value="#{PersonalDetails.name}" required="true"/><br/>
+        Email <h:inputText id="email" value="#{PersonalDetails.email}" required="true"/><br/>
+        Wiek <h:inputText id="age" value="#{PersonalDetails.age}" required="true"/><br/>
+        Wykształcenie <h:inputText id="education" value="#{PersonalDetails.education}" required="true"/><br/>
+        Wzrost <h:inputText id="height" value="#{PersonalDetails.height}" required="true"/><br/>
+        Płeć
+        <h:selectOneMenu value="#{PersonalDetails.sex}" required="true">
+            <f:selectItem itemValue = "none" itemLabel = "" />
+            <f:selectItem itemValue = "male" itemLabel = "Mężczyzna" />
+            <f:selectItem itemValue = "female" itemLabel = "Kobieta" />
+            <f:ajax render="input" />
+        </h:selectOneMenu><br/>
+        <h:panelGroup id="input">
+            <h:outputLabel rendered="#{PersonalDetails.sex == 'male'}">Obwód w pasie: </h:outputLabel>
+            <h:inputText value="#{PersonalDetails.belt}" rendered="#{PersonalDetails.sex == 'male'}" required="true" /> <br/>
+            <h:outputLabel rendered="#{PersonalDetails.sex == 'male'}">Obwód w klatce: </h:outputLabel>
+            <h:inputText value="#{PersonalDetails.chest}" rendered="#{PersonalDetails.sex == 'male'}" required="true" /> <br/>
+            <h:outputLabel rendered="#{PersonalDetails.sex == 'female'}">Miseczka: </h:outputLabel>
+            <h:inputText value="#{PersonalDetails.cupSize}" rendered="#{PersonalDetails.sex == 'female'}" required="true" /> <br/>
+            <h:outputLabel rendered="#{PersonalDetails.sex == 'female'}">Obwód biustu: </h:outputLabel>
+            <h:inputText value="#{PersonalDetails.breastCircumference}" rendered="#{PersonalDetails.sex == 'female'}" required="true" /> <br/>
+            <h:outputLabel rendered="#{PersonalDetails.sex == 'female'}">Obwód w biodrach: </h:outputLabel>
+            <h:inputText value="#{PersonalDetails.hips}" rendered="#{PersonalDetails.sex == 'female'}" required="true" /> <br/>
+            <h:outputLabel rendered="#{PersonalDetails.sex == 'female'}">Obwód w talii: </h:outputLabel>
+            <h:inputText value="#{PersonalDetails.waist}" rendered="#{PersonalDetails.sex == 'female'}" required="true" /> <br/>
+        </h:panelGroup>
+
+        <h:commandButton value="Dalej" action="#{PersonalDetails.validate}">
+            <f:ajax event="change" render="additional" />
+            <!--<f:ajax event="click" render="wrongDataInfo" />-->
+        </h:commandButton><br/>
+        <h:panelGroup id="wrongDataInfo" rendered="#{PersonalDetails.errorMessage != ''} ">#{PersonalDetails.errorMessage}</h:panelGroup>
+
+        <h:panelGroup id="additional" rendered="#{PersonalDetails.show}">
+            <h:outputLabel>Podaj dodatkowe informacje</h:outputLabel>
+
+            Ile jesteś w stanie przeznaczyc miesięcznie na zakup ubrania?
+            <h:selectOneMenu value="#{PersonalDetails.cash}" required="true"  rendered="#{PersonalDetails.show}">
+                <f:selectItem itemValue = "none" itemLabel = "nic" />
+                <f:selectItem itemValue = "do 100" itemLabel = "do 100zł" />
+                <f:selectItem itemValue = "od 100 do 500" itemLabel = "od 100 do 500 zł" />
+                <f:selectItem itemValue = "od 500 do 1000" itemLabel = "od 500 do 1000 zł" />
+                <f:selectItem itemValue = "od 1000" itemLabel = "ponad 1000 zł" />
+            </h:selectOneMenu><br/>
+
+            Jak często dokonujesz zakupu ubrania?
+            <h:selectOneMenu value="#{PersonalDetails.cash}" required="true">
+                <f:selectItem itemValue = "none" itemLabel = "nigdy" />
+                <f:selectItem itemValue = "Codziennie" itemLabel = "Codziennie" />
+                <f:selectItem itemValue = "Raz w tygoudniu" itemLabel = "Raz w tygodniu" />
+                <f:selectItem itemValue = "Raz w miesiacu" itemLabel = "Raz w miesiącu" />
+                <f:selectItem itemValue = "Kilka razy w roku" itemLabel = "Kilka razy w roku" />
+            </h:selectOneMenu><br/>
+
+            W jakich kolorach preferujesz ubrania?
+            <h:selectManyCheckbox value="#{PersonalDetails.colors}" required="true">
+                <f:selectItem itemValue = "Kolorowo-jaskrawych" itemLabel = "Kolorowo-jaskrawych" />
+                <f:selectItem itemValue = "Stonowanych w szarościach" itemLabel = "Stonowanych w szarościach" />
+                <f:selectItem itemValue = "W czerni i bieli" itemLabel = "W czerni i bieli" />
+                <f:selectItem itemValue = "W samej czerni" itemLabel = "W samej czerni" />
+            </h:selectManyCheckbox><br/>
+
+            Jakiego rodzaju ubrania najchętniej kupujesz?
+            <h:selectManyCheckbox value="#{PersonalDetails.types}" required="true" rendered="#{PersonalDetails.sex eq 'female'}">
+                <f:selectItem itemValue = "garsonki" itemLabel="garsonki"/>
+                <f:selectItem itemValue = "bluzki" itemLabel="bluzki"/>
+                <f:selectItem itemValue = "spódniczki" itemLabel="spódniczki"/>
+                <f:selectItem itemValue = "spodnie" itemLabel="spodnie"/>
+            </h:selectManyCheckbox>
+            <h:selectManyCheckbox value="#{PersonalDetails.types}" required="true" rendered="#{PersonalDetails.sex eq 'male'}">
+                <f:selectItem itemValue = "spodnie" itemLabel="spodnie"/>
+                <f:selectItem itemValue = "spodenki" itemLabel="spodenki"/>
+                <f:selectItem itemValue = "garnitury" itemLabel="garnitury"/>
+                <f:selectItem itemValue = "koszule" itemLabel="koszule"/>
+                <f:selectItem itemValue = "krawaty" itemLabel="krawaty"/>
+            </h:selectManyCheckbox>
+
+            <h:commandButton value="Wyślij" action="#{PersonalDetailsManager.add(PersonalDetails)}"></h:commandButton>
+        </h:panelGroup>
+    </h:form>
+
+    <h:form>
+        <h:commandButton value="" action="#{PersonalDetailsManager.increment}" image="http://www.tutorialspoint.com/images/jsf-mini-logo.png"/>
+        <h:commandLink action="#{PersonalDetailsManager.increment}">
+            <h:graphicImage height="1" width="1" value = "http://www.tutorialspoint.com/images/jsf-mini-logo.png"/>
+        </h:commandLink>
+    </h:form>
+
+</h:body>
+</html>
