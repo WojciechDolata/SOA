@@ -12,12 +12,15 @@
 
 </h:head>
 <h:body>
-   Czy masz luck?
+   Czy masz szczęście?
    <h:form>
       <h:outputLabel>Podaj dane</h:outputLabel>
       IMIE <h:inputText/>
       WIEK <h:inputText/>
-      <h:commandButton value="wyslij" action="#{Losowanie.wyslij}"></h:commandButton>
+      <h:commandButton value="wyslij" action="#{Losowanie.wyslij}"/>
+      <h:commandButton value="BIBLIOTEKA" action="library"/>
+      <h:commandButton value="ANKIETa" action="ankieta"/>
    </h:form>
+
 </h:body>
 </html>

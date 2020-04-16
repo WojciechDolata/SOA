@@ -6,29 +6,29 @@ import java.util.List;
 @ManagedBean(name = "PersonalDetails")
 @ViewScoped
 public class PersonalDetails {
-    String name = "";
-    String email;
-    Integer age;
-    String sex;
-    String education;
-    Integer height;
+    private String name = "";
+    private String email;
+    private Integer age;
+    private String sex;
+    private String education;
+    private Integer height;
 
-    String breastCircumference;
-    String cupSize;
-    String waist;
-    String hips;
+    private String breastCircumference;
+    private String cupSize;
+    private String waist;
+    private String hips;
 
-    String belt;
-    String chest;
+    private String belt;
+    private String chest;
 
-    String errorMessage = "";
+    private String errorMessage = "";
 
-    public boolean show = false;
+    private boolean show = false;
 
-    String cash;
-    String howOften;
-    List<String> colors = new LinkedList<>();
-    List<String> types = new LinkedList<>();
+    private String cash;
+    private String howOften;
+    private List<String> colors = new LinkedList<>();
+    private List<String> types = new LinkedList<>();
 
     public boolean validate(){
         try {

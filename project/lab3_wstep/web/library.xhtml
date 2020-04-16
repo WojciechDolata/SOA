@@ -6,21 +6,26 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:p="http://primefaces.org/ui">
-<!--<f:view>-->
-<!--<h:outputLabel value="Hello, world"/>-->
-<!--</f:view>-->
 <h:head>
     Biblioteka
 </h:head>
 <h:body>
     Witaj w bibliotece <br/>
 
-
-    sadasdasd adas dasd asd as
-    <!--#{Library.books}-->
     <h:form>
-        <p:dataTable var="bk" value="#{Library.books}"
-                     filteredValue="#{Library.filteredBooks}" emptyMessage="Nic nie spełnia kryteriów">
+        <h:selectOneRadio id="currencyRadio" value ="#{Library.currency}" valueChangeListener="#{Library.onCurrencyChange}">
+            <f:selectItem itemLabel="PLN" itemValue="PLN"/>
+            <f:selectItem itemLabel="EUR" itemValue="EUR"/>
+            <f:selectItem itemLabel="USD" itemValue="USD"/>
+        </h:selectOneRadio>
+        <h:commandButton value="Zastosuj" action="#{Library.onCurrencyChange}"/>
+    </h:form>
+
+
+    <h:form>
+        <p:dataTable id="bookList" var="bk" value="#{Library.books}" rowKey="#{bk.id}"
+                     filteredValue="#{Library.filteredBooks}" emptyMessage="Nic nie spełnia kryteriów"
+                     selectionMode="multiple" selection="#{Library.selectedBooks}">
             <p:column headerText="Title">
                 <h:outputText value="#{bk.title}" />
             </p:column>
@@ -33,7 +38,7 @@
                 <h:outputText value="#{bk.type}" />
             </p:column>
 
-            <p:column headerText="Price" filterBy="#{bk.price}" sortBy="#{bk.price}" filterFunction="">
+            <p:column headerText="Price">
                 <h:outputText value="#{bk.price}" />
             </p:column>
 
@@ -44,6 +49,9 @@
             <p:column headerText="Page Count">
                 <h:outputText value="#{bk.pageCount}" />
             </p:column>
+            <f:facet name="footer">
+                <p:commandButton process="bookList" icon="pi pi-search" value="View" action="#{Library.createNewOrder()}" />
+            </f:facet>
         </p:dataTable>
     </h:form>
 </h:body>
