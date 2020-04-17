@@ -5,10 +5,10 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
-          <factory-entry name="JPA-Zajecia" value="020b9e11-816a-4e30-85fd-6f09d564acbc" />
+          <factory-entry name="MyProvider" value="020b9e11-816a-4e30-85fd-6f09d564acbc" />
         </datasource-mapping>
         <naming-strategy-map />
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistance.xml" />
+        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>
     </facet>
   </component>

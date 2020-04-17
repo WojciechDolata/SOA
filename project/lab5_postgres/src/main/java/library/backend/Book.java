@@ -7,7 +7,7 @@ import java.util.Objects;
 
 @Entity
 @Table( name = "book")
-public class Book{
+public class Book implements Serializable{
 //    private static Integer index = 0;
     private Integer id;
     private String title;
@@ -19,6 +19,25 @@ public class Book{
 
     public Book() {
         super();
+    }
+
+    public Book(Integer id, String title, String author, String type, Double price, String currency, Integer pageCount) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.type = type;
+        this.price = price;
+        this.currency = currency;
+        this.pageCount = pageCount;
+    }
+
+    public Book(String title, String author, String type, Double price, String currency, Integer pageCount) {
+        this.title = title;
+        this.author = author;
+        this.type = type;
+        this.price = price;
+        this.currency = currency;
+        this.pageCount = pageCount;
     }
 
     @Id

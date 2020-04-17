@@ -544,8 +544,5 @@
         <deployment name="postgresql" runtime-name="postgresql-42.2.12.jar">
             <content sha1="1ed5b5f16a67f312a50d420e8bcb7d30b40b033d"/>
         </deployment>
-        <deployment name="lab5_library-1.0-SNAPSHOT" runtime-name="lab5_library-1.0-SNAPSHOT.war">
-            <fs-exploded path="/home/dolawojc/SOA/project/lab5_postgres/target/lab5_library-1.0-SNAPSHOT"/>
-        </deployment>
     </deployments>
 </server>

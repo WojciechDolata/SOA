@@ -1,13 +1,30 @@
 package library.frontend;
 
+import library.backend.DatabaseManagerInterface;
+
+import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Objects;
 
 @ManagedBean(name = "Book")
 @ViewScoped
 public class Book implements Serializable {
+    @EJB
+    private DatabaseManagerInterface databaseManager;
+
+    @ManagedProperty(value="#{Library}")
+    private Library library;
+
+    public void setLibrary(Library library) {
+        this.library = library;
+    }
+
     private static Integer index = 0;
     private Integer id;
     private String title;
@@ -17,6 +34,47 @@ public class Book implements Serializable {
     private String currency;
     private Integer pageCount;
 
+    public String addBook() {
+        databaseManager.addBook(convert(this));
+        return "library";
+    }
+    @PostConstruct
+    public void fillMissingData() {
+        FacesContext fc = FacesContext.getCurrentInstance();
+        Map<String, String> params = fc.getExternalContext().getRequestParameterMap();
+
+        try {
+            id = Integer.parseInt(params.get("id"));
+        } catch (NumberFormatException e) {
+            id = -1;
+        }
+        if(id > -1) {
+            var b = library.getBookById(id);
+            setCurrency(b.getCurrency());
+            setTitle(b.getTitle());
+            setAuthor(b.getAuthor());
+            setPrice(b.getPrice());
+            setType(b.getType());
+            setPageCount(b.getPageCount());
+        }
+    }
+
+    public void removeBook() {
+        databaseManager.removeBook(getId());
+    }
+
+    public String updateBook() {
+        databaseManager.updateBook(convert(this));
+        return "library";
+    }
+
+    public static Book convert(library.backend.Book oldBook) {
+        return new Book(oldBook.getId(), oldBook.getTitle(), oldBook.getAuthor(), oldBook.getType(), oldBook.getPrice(), oldBook.getCurrency(), oldBook.getPageCount());
+    }
+
+    public static library.backend.Book convert(library.frontend.Book frontBook) {
+        return new library.backend.Book(frontBook.getId(), frontBook.getTitle(), frontBook.getAuthor(), frontBook.getType(), frontBook.getPrice(), frontBook.getCurrency(), frontBook.getPageCount());
+    }
 
     /* currency is one of the following: "PLN", "EUR" or "USD" */
     public void convertCurrency(String curr) {
@@ -69,6 +127,16 @@ public class Book implements Serializable {
 
     public Book() {
 
+    }
+
+    public Book(Integer id, String title, String author, String type, double price, String currency, int pageCount) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.type = type;
+        this.price = price;
+        this.currency = currency;
+        this.pageCount = pageCount;
     }
 
     public Book(String title, String author, String type, double price, String currency, int pageCount) {
