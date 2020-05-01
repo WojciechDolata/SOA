@@ -17,16 +17,22 @@
              version="2.1">
     <persistence-unit name="MyProvider">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        <class>library.backend.Book</class>
+        <class>library.backend.models.Pozycja</class>
+        <class>library.backend.models.Czytelnik</class>
+        <class>library.backend.models.Kategoria</class>
+        <class>library.backend.models.Ksiazka</class>
+        <class>library.backend.models.Autor</class>
+        <class>library.backend.models.Wypozyczenie</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/testdb" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/Library" />
             <property name="javax.persistence.jdbc.user" value="postgres" />
             <property name="javax.persistence.jdbc.password" value="postgres" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="true" />
             <property name="hibernate.format_sql" value="true" />
+            <property name="hibernate.transaction.jta.platform" value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
         </properties>
     </persistence-unit>
 </persistence>

@@ -4,19 +4,23 @@ package library.backend.models;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.*;
 import java.util.List;
 
+@ManagedBean(name = "Pozycja")
+@ViewScoped
 @Getter
 @Setter
 @Entity
 @Table(name = "pozycje")
-public class Pozycja {
+public class Pozycja extends BaseModel {
 
     @Id
     @GeneratedValue
     @Column(name = "pozycja_id")
-    private Integer id;
+    private Integer pozycja_id;
 
     @Column(name = "status")
     private String status;
@@ -26,8 +30,9 @@ public class Pozycja {
     private Ksiazka ksiazka;
 
     @OneToMany(mappedBy = "pozycja", cascade = CascadeType.ALL)
-    private List<Wypozyczenia> wypozyczenia;
+    private List<Wypozyczenie> wypozyczenia;
 
     public Pozycja() {
+        setStatus("ok");
     }
 }

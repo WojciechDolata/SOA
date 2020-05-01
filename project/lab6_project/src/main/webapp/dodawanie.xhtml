@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+>
+<h:head>
+</h:head>
+<h:body>
+
+    Dodawanie książki <br/>
+    <h:form>
+        Tytuł <h:inputText id="title" value="#{AddBookAuthorBean.ksiazka.tytul}" required="true"/><br/>
+        Numer ISBN <h:inputText id="numer" value="#{AddBookAuthorBean.ksiazka.numerISBN}" required="true"/><br/>
+        Autor <br/>
+        Imie:<h:inputText id="author_name" value="#{AddBookAuthorBean.autor.imie}" required="true"/><br/>
+        Nazwisko:<h:inputText id="author_surname" value="#{AddBookAuthorBean.autor.nazwisko}" required="true"/><br/>
+        Typ: <h:inputText id="type" value="#{AddBookAuthorBean.kategoria.typ}" required="true"/><br/>
+        Ilość: <h:inputText id="price" value="#{AddBookAuthorBean.bookCount}" required="true"/><br/>
+
+        <h:commandButton value="Zastosuj" action="#{AddBookAuthorBean.addBook}"/>
+    </h:form>
+
+    Dodawanie autora <br/>
+    <h:form>
+        imie:<h:inputText id="author_name2" value="#{AddBookAuthorBean.autor.imie}" required="true"/><br/>
+        imie:<h:inputText id="author_surname2" value="#{AddBookAuthorBean.autor.nazwisko}" required="true"/><br/>
+
+        <h:commandButton value="Zastosuj" action="#{AddBookAuthorBean.addAuthor}"/>
+    </h:form>
+
+
+</h:body>
+</html>

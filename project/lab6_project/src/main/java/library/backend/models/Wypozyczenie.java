@@ -4,19 +4,23 @@ package library.backend.models;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.*;
 import java.sql.Date;
 
+@ManagedBean(name = "Wypozyczenie")
+@ViewScoped
 @Getter
 @Setter
 @Entity
 @Table(name = "wypozyczenia")
-public class Wypozyczenia {
+public class Wypozyczenie extends BaseModel {
 
     @Id
     @GeneratedValue
     @Column(name = "wypozyczenia_id")
-    private Integer id;
+    private Integer wypozyczenie_id;
 
     @Column(name = "wypozyczenie_od")
     private Date wypozyczenieOd;
@@ -32,6 +36,6 @@ public class Wypozyczenia {
     @JoinColumn(name = "czytelnik_id")
     private Czytelnik czytelnik;
 
-    public Wypozyczenia() {
+    public Wypozyczenie() {
     }
 }

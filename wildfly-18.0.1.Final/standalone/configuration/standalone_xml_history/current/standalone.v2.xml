@@ -158,20 +158,9 @@
                         <password>sa</password>
                     </security>
                 </datasource>
-                <datasource jndi-name="java:/PostgresDS" pool-name="PostgresPool">
-                    <connection-url>jdbc:postgresql://localhost:5432/testDB</connection-url>
-                    <driver>postgres</driver>
-                    <security>
-                        <user-name>postgres</user-name>
-                        <password>postgres</password>
-                    </security>
-                </datasource>
                 <drivers>
                     <driver name="h2" module="com.h2database.h2">
                         <xa-datasource-class>org.h2.jdbcx.JdbcDataSource</xa-datasource-class>
-                    </driver>
-                    <driver name="postgres" module="org.postgres">
-                        <driver-class>org.postgresql.Driver</driver-class>
                     </driver>
                 </drivers>
             </datasources>
@@ -538,14 +527,8 @@
         </outbound-socket-binding>
     </socket-binding-group>
     <deployments>
-        <deployment name="WildFlyTest_war.war" runtime-name="WildFlyTest_war.war">
-            <content sha1="1e400f8d63500da8af3a6cc32f25ed43027906f4"/>
-        </deployment>
-        <deployment name="postgresql" runtime-name="postgresql-42.2.12.jar">
-            <content sha1="1ed5b5f16a67f312a50d420e8bcb7d30b40b033d"/>
-        </deployment>
-        <deployment name="lab5_library-1.0-SNAPSHOT" runtime-name="lab5_library-1.0-SNAPSHOT.war" enabled="false">
-            <fs-exploded path="/home/dolawojc/SOA/project/lab5_postgres/target/lab5_library-1.0-SNAPSHOT"/>
+        <deployment name="lab6_project-1.0-SNAPSHOT.war" runtime-name="lab6_project-1.0-SNAPSHOT.war" enabled="false">
+            <fs-archive path="C:\Users\wojci\Documents\SOA\SOA\project\lab6_project\target\lab6_project-1.0-SNAPSHOT.war"/>
         </deployment>
     </deployments>
 </server>

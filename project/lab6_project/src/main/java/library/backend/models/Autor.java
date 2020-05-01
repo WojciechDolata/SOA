@@ -4,19 +4,24 @@ package library.backend.models;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.*;
 import java.util.List;
 
+
+@ManagedBean(name = "Autor")
+@ViewScoped
 @Getter
 @Setter
 @Entity
 @Table(name = "autorzy")
-public class Autor {
+public class Autor extends BaseModel {
 
     @Id
     @GeneratedValue
     @Column(name = "autor_id")
-    private Integer id;
+    private Integer autor_id;
 
     @Column(name = "imie")
     private String imie;

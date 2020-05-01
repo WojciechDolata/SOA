@@ -4,19 +4,23 @@ package library.backend.models;
 import lombok.Getter;
 import lombok.Setter;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 import javax.persistence.*;
 import java.util.List;
 
+@ManagedBean(name = "Ksiazka")
+@ViewScoped
 @Getter
 @Setter
 @Entity
 @Table(name = "ksiazki")
-public class Ksiazka {
+public class Ksiazka extends BaseModel {
 
     @Id
     @GeneratedValue
     @Column(name = "ksiazka_id")
-    private Integer id;
+    private Integer ksiazka_id;
 
     @Column(name = "tytul")
     private String tytul;
@@ -32,7 +36,7 @@ public class Ksiazka {
     @JoinColumn(name = "autor_id")
     private Autor autor;
 
-    @OneToMany(mappedBy = "pozycja", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "ksiazka", cascade = CascadeType.ALL)
     private List<Pozycja> pozycje;
 
     public Ksiazka() {
