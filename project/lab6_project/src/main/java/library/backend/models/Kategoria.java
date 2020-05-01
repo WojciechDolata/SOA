@@ -30,4 +30,12 @@ public class Kategoria extends BaseModel {
 
     public Kategoria() {
     }
+
+    @Override
+    public String toString() {
+        return "Kategoria{" +
+                "kategoria_id=" + kategoria_id +
+                ", typ='" + typ + '\'' +
+                '}';
+    }
 }

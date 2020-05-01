@@ -39,6 +39,7 @@ public class BaseDatabaseService implements BaseDatabaseServiceInterface {
         }
     }
 
+    @Override
     public List<BaseModel> getByCustomQuery(String type, String query) {
         return (List<BaseModel>) em.createQuery(query, getClassFromString(type)).getResultList();
     }

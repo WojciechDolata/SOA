@@ -39,6 +39,15 @@ public class Ksiazka extends BaseModel {
     @OneToMany(mappedBy = "ksiazka", cascade = CascadeType.ALL)
     private List<Pozycja> pozycje;
 
+    @Override
+    public String toString() {
+        return "Ksiazka{" +
+                "ksiazka_id=" + ksiazka_id +
+                ", tytul='" + tytul + '\'' +
+                ", numerISBN='" + numerISBN + '\'' +
+                '}';
+    }
+
     public Ksiazka() {
     }
 }

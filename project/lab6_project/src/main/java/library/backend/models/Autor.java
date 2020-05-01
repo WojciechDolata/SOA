@@ -39,4 +39,13 @@ public class Autor extends BaseModel {
 
     public Autor() {
     }
+
+    @Override
+    public String toString() {
+        return "Autor{" +
+                "autor_id=" + autor_id +
+                ", imie='" + imie + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
+                '}';
+    }
 }

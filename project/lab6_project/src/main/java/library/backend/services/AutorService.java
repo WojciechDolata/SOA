@@ -31,12 +31,8 @@ public class AutorService extends BaseDatabaseService implements AutorServiceInt
 
     @Override
     public Autor getMostPopular() {
-        return em.createQuery("SELECT a FROM Autor a " +
-                "JOIN Ksiazka k ON k.autor_id = a.autor_id " +
-                "JOIN Pozycja p ON p.ksiazka_id = k.ksiazka_id " +
-                "JOIN Wypozyczenie w ON w.pozycja_id = c.pozycja_id " +
-                "ORDER BY COUNT(w.wypozyczenia_id) DESC ", Autor.class)
-                .getSingleResult();
+        return em.createQuery("SELECT a FROM Autor a JOIN a.ksiazki k JOIN k.pozycje p JOIN  p.wypozyczenia w JOIN w.czytelnik c group by a.autor_id order by count(w.wypozyczenie_id) DESC", Autor.class)
+                .getResultList().get(0);
     }
 
     @Override

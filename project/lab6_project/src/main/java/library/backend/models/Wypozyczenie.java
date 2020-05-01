@@ -38,4 +38,13 @@ public class Wypozyczenie extends BaseModel {
 
     public Wypozyczenie() {
     }
+
+    @Override
+    public String toString() {
+        return "Wypozyczenie{" +
+                "wypozyczenie_id=" + wypozyczenie_id +
+                ", wypozyczenieOd=" + wypozyczenieOd +
+                ", wypozyczenieDo=" + wypozyczenieDo +
+                '}';
+    }
 }

@@ -38,4 +38,13 @@ public class Czytelnik extends BaseModel {
 
     public Czytelnik() {
     }
+
+    @Override
+    public String toString() {
+        return "Czytelnik{" +
+                "czytelnik_id=" + czytelnik_id +
+                ", imie='" + imie + '\'' +
+                ", nazwisko='" + nazwisko + '\'' +
+                '}';
+    }
 }

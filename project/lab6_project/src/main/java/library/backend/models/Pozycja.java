@@ -25,6 +25,14 @@ public class Pozycja extends BaseModel {
     @Column(name = "status")
     private String status;
 
+    @Override
+    public String toString() {
+        return "Pozycja{" +
+                "pozycja_id=" + pozycja_id +
+                ", status='" + status + '\'' +
+                '}';
+    }
+
     @ManyToOne
     @JoinColumn(name = "ksiazka_id")
     private Ksiazka ksiazka;

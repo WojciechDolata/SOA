@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+>
+<!--<f:view>-->
+<!--<h:outputLabel value="Hello, world"/>-->
+<!--</f:view>-->
+<h:head>
+</h:head>
+<h:body>
+
+    Wybierz zapytanie <br/>
+    <h:form>
+        <h:selectOneRadio id="dataType" value="#{SearchParametersBean.type}">
+            <f:selectItem itemLabel="Autor" itemValue="autor"/>
+            <f:selectItem itemLabel="Czytelnik" itemValue="czytelnik"/>
+            <f:selectItem itemLabel="Kategoria" itemValue="kategoria"/>
+            <f:selectItem itemLabel="Ksiazka" itemValue="ksiazka"/>
+            <f:selectItem itemLabel="pozycja" itemValue="pozycja"/>
+            <f:selectItem itemLabel="wypozyczenie" itemValue="wypozyczenie"/>
+        </h:selectOneRadio>
+        Autor: <br/>
+        Imie: <h:inputText id="autorImie" value="#{Parameters.autorImie}" required="false"/>
+        Nazwisko: <h:inputText id="autorNazwisko" value="#{Parameters.autorNazwisko}" required="false"/><br/>
+
+        Czytelnik: <br/>
+        Imie: <h:inputText id="czytelnikImie" value="#{Parameters.czytelnikImie}" required="false"/>
+        Nazwisko: <h:inputText id="czytelnikNazwisko" value="#{Parameters.czytelnikNazwisko}" required="false"/><br/>
+
+        Kategoria: <h:inputText id="kategoriaTyp" value="#{Parameters.kategoriaTyp}" required="false"/><br/>
+
+        Ksiazka: <br/>
+        Tytul: <h:inputText id="ksiazkaTytul" value="#{Parameters.ksiazkaTytul}" required="false"/><br/>
+        Number ISBN: <h:inputText id="ksiazkaNumer" value="#{Parameters.ksiazkaNumer}" required="false"/><br/>
+
+        Pozycja: <h:inputText id="pozycjaStatus" value="#{Parameters.pozycjaStatus}" required="false"/><br/>
+
+        <h:commandButton value="Wyszukaj" action="#{SearchParametersBean.buildQuery}"/>
+        <h:commandButton value="Do strony głównej" action="index"/>
+        <h:commandButton value="Do dodawania" action="dodawanie"/>
+        <h:commandButton value="Do wypożyczania" action="wypozyczenie"/>
+    </h:form>
+
+
+
+
+</h:body>
+</html>
