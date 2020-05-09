@@ -195,7 +195,7 @@
                     <managed-scheduled-executor-service name="default" jndi-name="java:jboss/ee/concurrency/scheduler/default" context-service="default" hung-task-threshold="60000" keepalive-time="3000"/>
                 </managed-scheduled-executor-services>
             </concurrent>
-            <default-bindings context-service="java:jboss/ee/concurrency/context/default" datasource="java:jboss/datasources/ExampleDS" jms-connection-factory="java:jboss/DefaultJMSConnectionFactory" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
+            <default-bindings context-service="java:jboss/ee/concurrency/context/default" jms-connection-factory="java:jboss/DefaultJMSConnectionFactory" managed-executor-service="java:jboss/ee/concurrency/executor/default" managed-scheduled-executor-service="java:jboss/ee/concurrency/scheduler/default" managed-thread-factory="java:jboss/ee/concurrency/factory/default"/>
         </subsystem>
         <subsystem xmlns="urn:jboss:domain:ee-security:1.0"/>
         <subsystem xmlns="urn:jboss:domain:ejb3:6.0">
@@ -578,8 +578,11 @@
         </outbound-socket-binding>
     </socket-binding-group>
     <deployments>
-        <deployment name="lab8_jms-1.0-SNAPSHOT" runtime-name="lab8_jms-1.0-SNAPSHOT.war" enabled="false">
+        <deployment name="lab8_jms-1.0-SNAPSHOT" runtime-name="lab8_jms-1.0-SNAPSHOT.war">
             <fs-exploded path="C:\Users\wojci\Documents\SOA\SOA\project\lab8_jms\target\lab8_jms-1.0-SNAPSHOT"/>
+        </deployment>
+        <deployment name="lab6_project-1.0-SNAPSHOT.war" runtime-name="lab6_project-1.0-SNAPSHOT.war" enabled="false">
+            <fs-archive path="C:\Users\wojci\Documents\SOA\SOA\project\lab6_project\target\lab6_project-1.0-SNAPSHOT.war"/>
         </deployment>
     </deployments>
 </server>

@@ -15,6 +15,7 @@ public class KategoriaService extends BaseDatabaseService implements KategoriaSe
 
     @Override
     public List<Kategoria> getAll() {
+        messageSendingService.sendMessage("GET ALL CATEGORIES");
         return em.createQuery("SELECT a FROM Kategoria a", Kategoria.class)
                 .getResultList();
     }
@@ -22,6 +23,7 @@ public class KategoriaService extends BaseDatabaseService implements KategoriaSe
     @Override
     public Kategoria getById(int id) {
         try {
+            messageSendingService.sendMessage("GET CATEGORIES BY ID: " + id);
             return em.createQuery("SELECT a FROM Kategoria a WHERE a.kategoria_id = :id", Kategoria.class)
                     .setParameter("id", id)
                     .getSingleResult();
@@ -32,12 +34,15 @@ public class KategoriaService extends BaseDatabaseService implements KategoriaSe
 
     @Override
     public void insert(Kategoria kategoria) {
+
+        messageSendingService.sendMessage("INSERT KATEGORIA");
         super.insert(kategoria);
     }
 
     @Override
     public Kategoria getByName(String typ) {
         try {
+            messageSendingService.sendMessage("GET KATEGORIA BY NAME: " + typ);
             return em.createQuery("SELECT a FROM Kategoria a WHERE a.typ = :typ", Kategoria.class)
                     .setParameter("typ", typ)
                     .getSingleResult();

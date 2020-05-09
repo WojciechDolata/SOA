@@ -2,7 +2,9 @@ package library.backend.services;
 
 import library.backend.models.*;
 import library.backend.services.interfaces.BaseDatabaseServiceInterface;
+import library.backend.services.messaging.MessageSendingServiceInterface;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -13,6 +15,9 @@ import java.util.List;
 @Remote
 public class BaseDatabaseService implements BaseDatabaseServiceInterface {
     public EntityManager em;
+
+    @EJB
+    public MessageSendingServiceInterface messageSendingService;
 
     public void insert(BaseModel enitity) {
         em.getTransaction().begin();

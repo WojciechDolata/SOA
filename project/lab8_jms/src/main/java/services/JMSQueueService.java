@@ -51,6 +51,7 @@ public class JMSQueueService {
 
     public void sendMessage(String message) {
         try {
+            var a = context.createProducer();
             context.createProducer().send(queue, message);
         } catch (Exception exc) {
             exc.printStackTrace();

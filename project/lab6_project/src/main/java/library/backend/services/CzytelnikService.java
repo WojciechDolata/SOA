@@ -16,6 +16,7 @@ public class CzytelnikService extends BaseDatabaseService implements CzytelnikSe
 
     @Override
     public List<Czytelnik> getAll() {
+        messageSendingService.sendMessage("GET ALL READERS");
         return em.createQuery("SELECT a FROM Czytelnik a", Czytelnik.class)
                 .getResultList();
     }
@@ -23,6 +24,7 @@ public class CzytelnikService extends BaseDatabaseService implements CzytelnikSe
     @Override
     public Czytelnik getById(int id) {
         try {
+            messageSendingService.sendMessage("GET READER BY ID: " + id);
             return em.createQuery("SELECT a FROM Czytelnik a WHERE a.czytelnik_id = :id", Czytelnik.class)
                     .setParameter("id", id)
                     .getSingleResult();
@@ -34,6 +36,7 @@ public class CzytelnikService extends BaseDatabaseService implements CzytelnikSe
     @Override
     public Czytelnik getByName(String imie, String nazwisko) {
         try {
+            messageSendingService.sendMessage("GET READER BY NAME: " + nazwisko);
             return em.createQuery("SELECT a FROM Czytelnik a WHERE a.imie = :name AND a.nazwisko = :surname", Czytelnik.class)
                     .setParameter("name", imie)
                     .setParameter("surname", nazwisko)
@@ -45,6 +48,8 @@ public class CzytelnikService extends BaseDatabaseService implements CzytelnikSe
 
     @Override
     public void insert(Czytelnik czytelnik) {
+        messageSendingService.sendMessage("INSERT READER: " + czytelnik);
+
         if (getByName(czytelnik.getImie(), czytelnik.getNazwisko()) == null){
             super.insert(czytelnik);
         }

@@ -25,6 +25,8 @@ public class KsiazkaService extends BaseDatabaseService implements KsiazkaServic
 
     @Override
     public List<Ksiazka> getAll() {
+        messageSendingService.sendMessage("GET ALL BOOKS");
+
         return em.createQuery("SELECT a FROM Ksiazka a", Ksiazka.class)
                 .getResultList();
     }
@@ -32,6 +34,8 @@ public class KsiazkaService extends BaseDatabaseService implements KsiazkaServic
     @Override
     public Ksiazka getById(int id) {
         try {
+            messageSendingService.sendMessage("GET BOOK BY ID: " + id);
+
             return em.createQuery("SELECT a FROM Ksiazka a WHERE a.ksiazka_id = :id", Ksiazka.class)
                     .setParameter("id", id)
                     .getSingleResult();
@@ -42,6 +46,8 @@ public class KsiazkaService extends BaseDatabaseService implements KsiazkaServic
 
     @Override
     public void insert(Ksiazka ksiazka) {
+        messageSendingService.sendMessage("INSERTING BOOK: " + ksiazka);
+
         if(getByTitle(ksiazka.getTytul()) != null) return;
 
         Autor tmpAutor = autorService.getByName(ksiazka.getAutor().getImie(), ksiazka.getAutor().getNazwisko());
@@ -64,6 +70,8 @@ public class KsiazkaService extends BaseDatabaseService implements KsiazkaServic
     @Override
     public Ksiazka getByTitle(String title) {
         try {
+            messageSendingService.sendMessage("GET BOOK BY TITLE: " + title);
+
             return em.createQuery("SELECT a FROM Ksiazka a WHERE a.tytul = '" + title + "'", Ksiazka.class).getSingleResult();
         } catch (NoResultException ex) {
             return null;

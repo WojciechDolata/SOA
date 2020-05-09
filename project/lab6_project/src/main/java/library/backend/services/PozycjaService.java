@@ -23,6 +23,8 @@ public class PozycjaService extends BaseDatabaseService implements PozycjaServic
 
     @Override
     public List<Pozycja> getAll() {
+        messageSendingService.sendMessage("GET ALL POSITIONS");
+
         return em.createQuery("SELECT a FROM Pozycja a", Pozycja.class)
                 .getResultList();
     }
@@ -30,6 +32,8 @@ public class PozycjaService extends BaseDatabaseService implements PozycjaServic
     @Override
     public Pozycja getById(int id) {
         try {
+            messageSendingService.sendMessage("GET POSITION BY ID: " + id);
+
             return em.createQuery("SELECT a FROM Pozycja a WHERE a.pozycja_id = :id", Pozycja.class)
                     .setParameter("id", id)
                     .getSingleResult();
@@ -40,12 +44,16 @@ public class PozycjaService extends BaseDatabaseService implements PozycjaServic
 
     @Override
     public void insert(Pozycja pozycja) {
+        messageSendingService.sendMessage("INSERT POSITION: " + pozycja);
+
         pozycja.setKsiazka(ksiazkaService.getByTitle(pozycja.getKsiazka().getTytul()));
         super.insert(pozycja);
     }
 
     @Override
     public void returnPozycja(int id) {
+        messageSendingService.sendMessage("RETURN POSITION: @" + id);
+
         em.getTransaction().begin();
         int success = em.createQuery("update Pozycja p set p.status = 'ok' where p.pozycja_id=:id")
                 .setParameter("id", id)
@@ -55,14 +63,17 @@ public class PozycjaService extends BaseDatabaseService implements PozycjaServic
 
     @Override
     public int loanPozycja(Ksiazka ksiazka, Czytelnik czytelnik, Wypozyczenie wypozyczenie) {
+
         Pozycja tmpPozycja;
         try {
             tmpPozycja = em.createQuery("select p from Pozycja p where p.ksiazka.tytul = :title and p.status = 'ok'", Pozycja.class)
                     .setParameter("title", ksiazka.getTytul())
                     .getResultList().get(0);
         } catch (NoResultException ex) {
+            messageSendingService.sendMessage("UNSUCCESSFUL LOAN POSITION: @" + ksiazka + "BY @" + czytelnik);
             return -1;
         }
+        messageSendingService.sendMessage("LOAN POSITION: @" + ksiazka + "BY @" + czytelnik);
 
         wypozyczeniaService.loan(tmpPozycja, czytelnik, wypozyczenie);
 
