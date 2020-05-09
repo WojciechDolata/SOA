@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    Biblioteka
+</h:head>
+<h:body>
+    Witaj w bibliotece <br/>
+
+    Najpopularniejszy autor dziś to: #{LibraryBean.topAuthor.imie} #{LibraryBean.topAuthor.nazwisko}
+
+
+    <h:form>
+        <p:dataTable id="bookList" var="bk" value="#{LibraryBean.allBooks}" rowKey="#{bk.ksiazka_id}">
+            <p:column headerText="Title">
+                <h:outputText value="#{bk.tytul}" />
+            </p:column>
+
+            <p:column headerText="Author">
+                <h:outputText value="#{bk.autor.imie} #{bk.autor.nazwisko}" />
+            </p:column>
+
+            <p:column headerText="ISBN">
+                <h:outputText value="#{bk.numerISBN}" />
+            </p:column>
+
+            <f:facet name="footer">
+<!--                <p:commandButton process="bookList" icon="pi pi-search" value="View" action="#{Library.createNewOrder()}" />-->
+<!--                <p:commandButton process="bookList" icon="pi pi-delete" value="Delete" action="#{Library.deleteBook()}" />-->
+<!--                <h:commandButton value="Edit first selected book" action="edit">-->
+<!--                    <f:param id="id" name="id" value="1"/>-->
+<!--                </h:commandButton>-->
+                <h:commandButton value="Dodaj" action="dodawanie"/>
+                <h:commandButton value="Do wyszukiwania" action="custom"/>
+                <h:commandButton value="Do wypożyczania" action="wypozyczenie"/>
+            </f:facet>
+        </p:dataTable>
+    </h:form>
+</h:body>
+</html>
