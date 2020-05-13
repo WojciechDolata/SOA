@@ -1,6 +1,7 @@
 package library.backend.services;
 
 import library.backend.models.*;
+import library.backend.services.interfaces.CzytelnikServiceInterface;
 import library.backend.services.interfaces.KsiazkaServiceInterface;
 import library.backend.services.interfaces.PozycjaServiceInterface;
 import library.backend.services.interfaces.WypozyczeniaServiceInterface;
@@ -14,6 +15,9 @@ import java.util.List;
 @Stateless
 @Remote
 public class PozycjaService extends BaseDatabaseService implements PozycjaServiceInterface {
+
+    @EJB
+    CzytelnikServiceInterface czytelnikService;
 
     @EJB
     KsiazkaServiceInterface ksiazkaService;
@@ -69,8 +73,10 @@ public class PozycjaService extends BaseDatabaseService implements PozycjaServic
             tmpPozycja = em.createQuery("select p from Pozycja p where p.ksiazka.tytul = :title and p.status = 'ok'", Pozycja.class)
                     .setParameter("title", ksiazka.getTytul())
                     .getResultList().get(0);
-        } catch (NoResultException ex) {
-            messageSendingService.sendMessage("UNSUCCESSFUL LOAN POSITION: @" + ksiazka + "BY @" + czytelnik);
+        } catch (Exception ex) {
+            var wantedBook = ksiazkaService.getByTitle(ksiazka.getTytul());
+            var czytelnikWypozyczajacy = czytelnikService.getByName(czytelnik.getImie(), czytelnik.getNazwisko());
+            messageSendingService.sendMessage("UNSUCCESSFUL LOAN POSITION: @" + wantedBook.getKsiazka_id() + "@" + czytelnikWypozyczajacy.getCzytelnik_id());
             return -1;
         }
         messageSendingService.sendMessage("LOAN POSITION: @" + ksiazka + "BY @" + czytelnik);

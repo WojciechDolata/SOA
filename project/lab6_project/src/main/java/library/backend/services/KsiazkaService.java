@@ -77,4 +77,16 @@ public class KsiazkaService extends BaseDatabaseService implements KsiazkaServic
             return null;
         }
     }
+
+
+    @Override
+    public Ksiazka getByPozycjaId(int id) {
+        try {
+            return em.createQuery("select k from Ksiazka k join k.pozycje p where p.pozycja_id = :id", Ksiazka.class)
+                    .setParameter("id", id)
+                    .getResultList().get(0);
+        } catch (NoResultException ex) {
+            return null;
+        }
+    }
 }

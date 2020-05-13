@@ -1,16 +1,11 @@
 package library.backend.services.messaging;
 
+import library.backend.services.interfaces.ApplicationMessageServiceInterface;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.annotation.Resource;
-import javax.ejb.ActivationConfigProperty;
-import javax.ejb.MessageDriven;
-import javax.ejb.Singleton;
-import javax.ejb.Startup;
-import javax.faces.bean.ApplicationScoped;
-import javax.faces.bean.ManagedBean;
-import javax.jms.ConnectionFactory;
+import javax.ejb.*;
+import javax.faces.bean.ManagedProperty;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -18,10 +13,11 @@ import javax.jms.MessageListener;
 
 //@ManagedBean(name = "MessageBean")
 //@ApplicationScoped
-//@Getter
-//@Setter
+@Getter
+@Setter
 //@Singleton
 //@Startup
+@Remote
 @MessageDriven(mappedName = "jms/Queue", activationConfig = {
         @ActivationConfigProperty(
                 propertyName = "acknowledgeMode",
@@ -35,11 +31,19 @@ import javax.jms.MessageListener;
 })
 public class MessageReceivingBean implements MessageListener {
 
+    @EJB
+    ApplicationMessageServiceInterface applicationMessageService;
 
     @Override
     public void onMessage(Message message) {
         try {
-            System.out.println("Message received: " + message.getBody(String.class));
+            String messageString = message.getBody(String.class);
+            System.out.println("Message received: " + messageString);
+            if(messageString.contains("UNSUCCESSFUL LOAN")) {
+                applicationMessageService.addLoanAttempt(messageString);
+            } else if (messageString.contains("RETURN")) {
+                applicationMessageService.addReturn(messageString);
+            }
         } catch (JMSException ex) {
             System.out.println("Error receiving message.");
         }

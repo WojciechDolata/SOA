@@ -14,4 +14,5 @@ public interface KsiazkaServiceInterface {
     public Ksiazka getById(int id);
     public void insert(Ksiazka ksiazka);
     public Ksiazka getByTitle(String title);
+    public Ksiazka getByPozycjaId(int id);
     }
