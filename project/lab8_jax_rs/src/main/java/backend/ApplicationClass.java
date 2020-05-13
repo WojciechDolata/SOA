@@ -1,6 +1,7 @@
 package backend;
 
 import backend.controllers.MovieController;
+import backend.controllers.OsobyController;
 import backend.controllers.UserController;
 
 import javax.ws.rs.ApplicationPath;
@@ -16,6 +17,7 @@ public class ApplicationClass extends Application {
         HashSet<Class<?>> set = new HashSet<Class<?>>();
         set.add(MovieController.class);
         set.add(UserController.class);
+        set.add(OsobyController.class);
         return set;
     }
 }
