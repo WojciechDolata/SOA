@@ -29,9 +29,21 @@ public class MovieController {
     @GET
     @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getMovieById(@PathParam("id") String id) {
+    public Response getMoviesById(@PathParam("id") String id) {
         try {
             return ok(service.getMovieById(Integer.parseInt(id))).build();
+        } catch (Exception ex) {
+            return Response.status(404, "Movie not found.").build();
+        }
+    }
+
+    @GET
+    @Path("/byUser/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getMoviesByUser(@PathParam("id") String name) {
+        try {
+            var a = service.getMoviesByUser(name);
+            return ok(a).build();
         } catch (Exception ex) {
             return Response.status(404, "Movie not found.").build();
         }
@@ -47,24 +59,31 @@ public class MovieController {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addMovie(@QueryParam("title") String title, @QueryParam("uri") String uri) {
-        service.addMovie(new Movie(title, uri));
+    public Response addMovie(Movie movie) {
+        service.addMovie(movie);
+        return ok().build();
+    }
+
+    @POST
+    @Path("/add/{name}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response addMovieToUser(Movie movie, @PathParam("name") String name) {
+        service.addMovieToUser(movie, name);
         return ok().build();
     }
 
     @PUT
-    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editMovie(@PathParam("id") Integer id, @QueryParam("title") String title, @QueryParam("uri") String uri) {
-        service.editMovie(new Movie(id, title, uri));
+    public Response editMovie(Movie movie) {
+        service.editMovie(movie);
         return ok().build();
     }
 
     @PUT
-    @Path("/{id}/uri")
+    @Path("/uri")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editMovieUri(@PathParam("id") String id, @QueryParam("uri") String uri) {
-        service.editMovieUri(Integer.parseInt(id), uri);
+    public Response editMovieUri(Movie movie) {
+        service.editMovieUri(movie.getMovie_id(), movie.getUri());
         return ok().build();
     }
 

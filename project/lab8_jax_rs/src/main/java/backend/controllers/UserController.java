@@ -37,16 +37,15 @@ public class UserController {
 
     @POST
     @Produces(MediaType.APPLICATION_JSON)
-    public Response addUser(@QueryParam("name") String name, @QueryParam("age") String age, @QueryParam("img") String imageUri) {
-        service.addUser(new User(name, Integer.parseInt(age), imageUri));
+    public Response addUser(User user) {
+        service.addUser(user);
         return ok().build();
     }
 
     @PUT
-    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response putCollection(@PathParam("id") String id, @QueryParam("name") String name, @QueryParam("age") String age, @QueryParam("img") String imageUri) {
-        service.editUser(new User(Integer.parseInt(id), name, Integer.parseInt(age), imageUri));
+    public Response put(List<User> users) {
+        service.addAll(users);
         return ok().build();
     }
 

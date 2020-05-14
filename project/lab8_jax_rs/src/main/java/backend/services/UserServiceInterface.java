@@ -14,9 +14,13 @@ public interface UserServiceInterface {
 
     User getUserById(int id);
 
+    User getUserByName(String name);
+
     List<User> getUsers();
 
     void addUser(User user);
+
+    void addAll(List<User> users);
 
     void editUser(User user);
 

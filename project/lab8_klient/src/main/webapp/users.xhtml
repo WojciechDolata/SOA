@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<head>
+    <title>User Menu</title>
+</head>
+<body>
+<br/>
+Dodawanie uzytkownika
+<h:form>
+    Nazwa <h:inputText id="namee" value="#{User.name}" required="true"/><br/>
+    Wiek <h:inputText id="age" value="#{User.age}" required="true"/><br/>
+    adres obrazka <h:inputText id="uri" value="#{User.image_uri}" required="true"/><br/>
+
+    <h:commandButton value="Zastosuj" action="#{Session.addUser(User)}"/>
+</h:form>
+<br/>
+<br/>
+<br/>
+Wybor uzytkownika
+<h:form>
+    Nazwa uzytkownika <h:inputText id="uid" value="#{User.name}" required="true"/><br/>
+
+    <h:commandButton value="Zastosuj" action="#{Session.selectUser(User)}"/>
+</h:form>
+
+<br/>
+<br/>
+<br/>
+Dodawanie filmu do użytkownika
+<h:form>
+    Nazwa uzytkownika <h:inputText id="title" value="#{User.name}" required="true"/><br/>
+    Tytul filmu <h:inputText id="numer" value="#{Movie.title}" required="true"/><br/>
+
+    <h:commandButton value="Zastosuj" action="#{MovieManager.addMovieForUser(Movie, User)}"/>
+</h:form>
+
+<br/>
+<br/>
+<br/>
+
+
+<h:form>
+    <p:dataTable id="movies" var="bk" value="#{Session.movies}">
+        <p:column headerText="Title">
+            <h:outputText value="#{bk.title}" />
+        </p:column>
+
+        <p:column headerText="URL">
+            <h:outputText value="#{bk.uri}" />
+        </p:column>
+
+        <p:column headerText="ID">
+            <h:outputText value="#{bk.movie_id}" />
+        </p:column>
+
+        <f:facet name="footer">
+            <h:commandButton value="Odśwież" action="#{Session.getDataForUser}"/>
+            <h:commandButton value="Do filmów" action="index"/>
+        </f:facet>
+    </p:dataTable>
+</h:form>
+</body>
+</html>

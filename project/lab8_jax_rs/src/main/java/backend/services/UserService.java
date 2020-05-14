@@ -25,9 +25,23 @@ public class UserService extends BasicService implements UserServiceInterface {
     }
 
     @Override
+    public User getUserByName(String name) {
+        return em.createQuery("SELECT u FROM User u LEFT JOIN FETCH u.movies m WHERE u.name = :id", User.class)
+                .setParameter("id", name)
+                .getSingleResult();
+    }
+
+    @Override
     public void addUser(User user) {
         em.getTransaction().begin();
         em.persist(user);
+        em.getTransaction().commit();
+    }
+
+    @Override
+    public void addAll(List<User> users) {
+        em.getTransaction().begin();
+        users.forEach(item -> em.persist(item));
         em.getTransaction().commit();
     }
 
