@@ -53,9 +53,10 @@ public class MovieController {
     }
 
     @PUT
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editMovie(@QueryParam("title") String title, @QueryParam("uri") String uri) {
-        service.editMovie(new Movie(title, uri));
+    public Response editMovie(@PathParam("id") Integer id, @QueryParam("title") String title, @QueryParam("uri") String uri) {
+        service.editMovie(new Movie(id, title, uri));
         return ok().build();
     }
 

@@ -49,4 +49,10 @@ public class User implements Serializable {
         this.age = age;
         this.image_uri = image_uri;
     }
+    public User(Integer id, String name, Integer age, String image_uri) {
+        this.user_id = id;
+        this.name = name;
+        this.age = age;
+        this.image_uri = image_uri;
+    }
 }

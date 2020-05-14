@@ -48,8 +48,11 @@ public class MovieService extends BasicService implements MovieServiceInterface 
 
     @Override
     public void editMovie(Movie movie) {
+        Movie m = getMovieById(movie.getMovie_id());
+        m.setUri(movie.getUri());
+        m.setTitle(movie.getTitle());
         em.getTransaction().begin();
-        em.persist(movie);
+        em.persist(m);
         em.getTransaction().commit();
     }
 

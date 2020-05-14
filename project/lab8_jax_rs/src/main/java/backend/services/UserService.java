@@ -5,6 +5,7 @@ import backend.models.User;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Stateless
 @Remote
@@ -32,8 +33,12 @@ public class UserService extends BasicService implements UserServiceInterface {
 
     @Override
     public void editUser(User user) {
+        User usr = getUserById(user.getUser_id());
+        usr.setAge(user.getAge());
+        usr.setName(user.getName());
+        usr.setImage_uri(user.getImage_uri());
         em.getTransaction().begin();
-        em.persist(user);
+        em.persist(usr);
         em.getTransaction().commit();
     }
 

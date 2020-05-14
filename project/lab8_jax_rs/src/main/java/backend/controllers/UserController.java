@@ -8,6 +8,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import java.util.List;
+
 import static javax.ws.rs.core.Response.ok;
 
 @Path("/user")
@@ -41,9 +43,10 @@ public class UserController {
     }
 
     @PUT
+    @Path("/{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response editUser(@QueryParam("name") String name, @QueryParam("age") String age, @QueryParam("img") String imageUri) {
-        service.editUser(new User(name, Integer.parseInt(age), imageUri));
+    public Response putCollection(@PathParam("id") String id, @QueryParam("name") String name, @QueryParam("age") String age, @QueryParam("img") String imageUri) {
+        service.editUser(new User(Integer.parseInt(id), name, Integer.parseInt(age), imageUri));
         return ok().build();
     }
 

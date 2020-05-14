@@ -41,4 +41,10 @@ public class Movie implements Serializable {
         this.uri = uri;
         this.title = title;
     }
+
+    public Movie(Integer id, String title, String uri) {
+        this.movie_id = id;
+        this.uri = uri;
+        this.title = title;
+    }
 }
