@@ -25,7 +25,6 @@ import java.util.List;
 public class SessionBean implements Serializable {
     private String basicUrl = "http://localhost:8080/lab8_jax_rs-1.0-SNAPSHOT/myapp";
 
-//    @ManagedProperty(value="#{User}")
     private User user;
 
     private List<Movie> movies;
@@ -41,9 +40,9 @@ public class SessionBean implements Serializable {
         return "users";
     }
 
-    public void selectUser(User user) {
+    public String selectUser(User user) {
         this.user = user;
-        getDataForUser();
+        return getDataForUser();
     }
 
     public String getDataForUser() {
@@ -51,8 +50,7 @@ public class SessionBean implements Serializable {
         var target = client.target(basicUrl+"/movie/byUser/" + user.getName());
         var response = target.request().get();
         try {
-            var a = response.readEntity(new GenericType<List<Movie>>() {});
-            movies = a;
+            movies = response.readEntity(new GenericType<List<Movie>>() {});
         } catch (Exception ex) {
             movies = new LinkedList<>();
         }

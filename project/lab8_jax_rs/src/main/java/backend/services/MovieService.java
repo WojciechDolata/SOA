@@ -6,10 +6,7 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.transaction.Transactional;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Stateless
 @Remote
@@ -34,8 +31,10 @@ public class MovieService extends BasicService implements MovieServiceInterface 
 
     @Override
     public List<Movie> getMovies() {
-        return em.createQuery("SELECT m FROM Movie m LEFT JOIN FETCH m.users", Movie.class)
+        var list = em.createQuery("SELECT m FROM Movie m LEFT JOIN FETCH m.users", Movie.class)
                 .getResultList();
+        for (var item : list) item.setUsers(null);
+        return list;
     }
 
     @Override
@@ -53,9 +52,13 @@ public class MovieService extends BasicService implements MovieServiceInterface 
     @Override
     @Transactional
     public List<Movie> getMoviesByUser(String name) {
-        return em.createQuery("SELECT m FROM Movie m LEFT JOIN FETCH m.users u where u.name = :name", Movie.class)
+        var list = em.createQuery("SELECT m FROM Movie m LEFT JOIN FETCH m.users u where u.name = :name", Movie.class)
                 .setParameter("name", name)
                 .getResultList();
+        for (var item : list) {
+            item.setUsers(null);
+        }
+        return list;
     }
 
     @Override
