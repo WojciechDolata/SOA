@@ -1,7 +1,10 @@
 package backend.controllers;
 
+import backend.models.Movie;
 import backend.models.User;
 import backend.services.UserServiceInterface;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;
@@ -12,6 +15,8 @@ import java.util.List;
 
 import static javax.ws.rs.core.Response.ok;
 
+
+@Api("user")
 @Path("/user")
 public class UserController {
 
@@ -19,6 +24,10 @@ public class UserController {
     private UserServiceInterface service;
 
     @GET
+    @ApiOperation(
+            value = "Finds all users.",
+            response = User.class,
+            responseContainer = "List")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUsers() {
         return ok(service.getUsers()).build();
@@ -26,6 +35,9 @@ public class UserController {
 
     @GET
     @Path("/{id}")
+    @ApiOperation(
+            value = "Finds user with given id",
+            response = User.class)
     @Produces(MediaType.APPLICATION_JSON)
     public Response getUserById(@PathParam("id") String id) {
         try {
@@ -36,6 +48,8 @@ public class UserController {
     }
 
     @POST
+    @ApiOperation(
+            value = "Adds user.")
     @Produces(MediaType.APPLICATION_JSON)
     public Response addUser(User user) {
         service.addUser(user);
@@ -43,6 +57,8 @@ public class UserController {
     }
 
     @PUT
+    @ApiOperation(
+            value = "Updates user.")
     @Produces(MediaType.APPLICATION_JSON)
     public Response put(List<User> users) {
         service.addAll(users);
@@ -51,6 +67,8 @@ public class UserController {
 
     @DELETE
     @Path("/{id}")
+    @ApiOperation(
+            value = "Deletes user.")
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteUser(@PathParam("id") String id) {
         service.deleteUser(Integer.parseInt(id));
